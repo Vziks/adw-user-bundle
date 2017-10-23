@@ -1,0 +1,29 @@
+services:
+    adw.user.admin.adminuser:
+        class: ADW\UserBundle\Admin\AdminUserAdmin
+        arguments: [~, ADW\UserBundle\Entity\AdminUser, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: AdminUser, label: AdminUser }
+        calls:
+            - [ setContainer, [ "@service_container" ] ]
+
+    adw.user.admin.password.listener:
+        class: ADW\UserBundle\EventListener\AdminUserPasswordListener
+        arguments:
+            - "@security.password_encoder"
+        tags:
+            - { name: doctrine.event_listener, event: prePersist, method: prePersist }
+            - { name: doctrine.event_listener, event: preUpdate, method: preUpdate }
+
+    adw.user.security.admin_authentication_handler:
+        class: ADW\UserBundle\Security\Handler\AdminAuthenticationHandler
+        arguments:
+            - "@router"
+
+    adw.user.admin_user_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+            - "ADWUserBundle:AdminUser"
+        calls:
+            - [setLogger, ["@monolog.logger"]]

@@ -1,0 +1,82 @@
+{# app/Resources/views/security/login.html.twig #}
+<script src="//code.jquery.com/jquery-1.11.3.js"></script>
+
+<script language="JavaScript">
+    function checkCaps(b) {
+        var a = 0, c = !1, a = document.all ? b.keyCode : b.which, c = b.shiftKey;
+        b = document.getElementById("pwcaps");
+        var d = 65 <= a && 90 >= a
+            , a = 97 <= a && 122 >= a;
+        if (d && !c || a && c)
+            b.style.display = "block";
+        else if (a && !c || d && c)
+            b.style.display = "none"
+    }
+
+    $(function() {
+        var frm = $('#login_form');
+        $(frm).submit(function(event) {
+            event.preventDefault(); // Prevent the form from submitting via the browser
+            $.ajax({
+                type: frm.attr('method'),
+                url: frm.attr('action'),
+                data: frm.serialize()
+            }).done(function(data) {
+                window.location.href = '{{ path('sonata_admin_dashboard') }}';
+            }).fail(function(data) {
+                $( "#error" ).show().html( 'Неверное имя пользователя или пароль' );
+            });
+        });
+    });
+</script>
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/adwuser/css/admin/admin.css') }}"/>
+{#{% if error %}#}
+    {#<div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>#}
+{#{% endif %}#}
+<div id="left" class="pr">
+    <div id="wrap">
+        <div id="main">
+            <div id="wrapper">
+                <div id="logo_wrapper" class="standard_logo_wrapper mb24"><h1
+                            style="height: 100%; display: table-cell; vertical-align: bottom;"><img id="logo"
+                                                                                                    class="standard_logo"
+                                                                                                    src="{{ asset('bundles/adwuser/img/adwatchisobar.png') }}"
+                                                                                                    alt="Adwatch Isobar"
+                                                                                                    border="0"
+                                                                                                    name="logo"></h1>
+                </div>
+                <div id="header" class="mb24" style="display: none;"></div>
+
+                <div id="content" style="display: block;">
+                    <div id="theloginform" style="display: block;">
+                        <form name="login" method="post" id="login_form"
+                              action="{{ path('app.security.login') }}" target="_top" autocomplete="off"
+                              novalidate="novalidate">
+                            <div class="loginError" id="error" style="display: none;">block</div>
+                            <div id="usernamegroup" class="inputgroup"><label for="username"
+                                                                              class="label">Username</label>
+                                <div id="username_container">
+                                    <input class="input r4 wide mb16 mt8 username" type="email" value="" name="_email"
+                                           id="username" style="display: block;">
+                                </div>
+                            </div>
+                            <label for="password" class="label">Password</label><input
+                                    class="input r4 wide mb16 mt8 password" type="password" id="password" name="_password"
+                                    onkeypress="checkCaps(event)" autocomplete="off">
+                            <div id="pwcaps" class="mb16" style="display:none"><img id="pwcapsicon"
+                                                                                    alt="Caps Lock is on." width="12"
+                                                                                    src="{{ asset('bundles/adwuser/img/capslock_blue.png') }}">
+                                Caps Lock is on.
+                            </div>
+                            <input class="button r4 wide primary" type="submit" id="Login" value="Log In">
+                            {#<div class="w0 pr ln3 p16 remember">#}
+                                {#<input type="checkbox" class="r4 fl mr8" style=""#}
+                                       {#id="remember_me" name="_remember_me"><label#}
+                                        {#for="rememberUn" class="fl pr db tn3">Remember me</label><br></div>#}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
