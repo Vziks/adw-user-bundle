@@ -55,7 +55,7 @@ class AdminUserAdmin extends AbstractAdmin
 
         $roles = $this->container->getParameter('security.role_hierarchy.roles');
 
-        $rolesChoices = self::flattenRoles($roles);
+        $rolesChoices = self::refactorRoles($roles);
 
         $formMapper
             ->add('email')
@@ -93,28 +93,26 @@ class AdminUserAdmin extends AbstractAdmin
         $this->container = $container;
     }
 
-    /**
-     * @param $rolesHierarchy
-     * @return array
-     */
-    protected static function flattenRoles($rolesHierarchy)
+    private function refactorRoles($originRoles)
     {
-        $flatRoles = [];
-        foreach($rolesHierarchy as $roles) {
+        $roles = array();
+        $rolesAdded = array();
 
-            if(empty($roles)) {
-                continue;
-            }
-
-            foreach($roles as $role) {
-                if(!isset($flatRoles[$role])) {
-                    $flatRoles[$role] = $role;
-                }
+        // Add herited roles
+        foreach ($originRoles as $roleParent => $rolesHerit) {
+            $tmpRoles = array_values($rolesHerit);
+            $rolesAdded = array_merge($rolesAdded, $tmpRoles);
+            $roles[$roleParent] = array_combine($tmpRoles, $tmpRoles);
+        }
+        // Add missing superparent roles
+        $rolesParent = array_keys($originRoles);
+        foreach ($rolesParent as $roleParent) {
+            if (!in_array($roleParent, $rolesAdded)) {
+                $roles['-----'][$roleParent] = $roleParent;
             }
         }
 
-        return $flatRoles;
+        return $roles;
     }
-
 
 }
