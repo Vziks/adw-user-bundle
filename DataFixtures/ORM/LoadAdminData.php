@@ -45,6 +45,7 @@ class LoadAdminData extends AbstractFixture implements FixtureInterface, Contain
         $admin = new AdminUser();
         $admin->setEmail("admin@gmail.com");
         $admin->setPlainPassword("admin");
+        $admin->setRoles(['ROLE_ADMIN','ROLE_SUPER_ADMIN']);
 
         return $admin;
     }

@@ -2,9 +2,8 @@
 
 namespace ADW\UserBundle\Repository;
 
-use ADW\UserBundle\Entity\AdminUser;
+
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query\Expr\Join;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
