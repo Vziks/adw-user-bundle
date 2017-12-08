@@ -27,3 +27,6 @@ services:
             - "ADWUserBundle:AdminUser"
         calls:
             - [setLogger, ["@monolog.logger"]]
+
+    ADW\UserBundle\DataFixtures\ORM\LoadAdminData:
+        tags: [doctrine.fixture.orm]
