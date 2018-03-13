@@ -44,8 +44,7 @@ class AdminSecurityController extends Controller
      */
     public function loginfAction()
     {
-
-        if($this->getUser()) {
+        if ($this->getUser()) {
             return $this->redirect($this->generateUrl('sonata_admin_dashboard'));
         }
         return $this->render('ADWUserBundle:Security:login.html.twig');
@@ -57,5 +56,4 @@ class AdminSecurityController extends Controller
     public function logoutAction()
     {
     }
-
 }

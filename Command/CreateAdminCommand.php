@@ -37,7 +37,6 @@ class CreateAdminCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-
         $this->em = $this->getContainer()->get('doctrine.orm.entity_manager');
 
         $user = $this->em->getRepository(AdminUser::class)->findOneBy(['email' => $input->getArgument('username')]);
@@ -46,7 +45,6 @@ class CreateAdminCommand extends ContainerAwareCommand
             $output->writeln('-------------------------');
             $output->writeln('<error>Admin user already exists!</error>');
         } else {
-
             $password = null;
 
             $newAdminRecord = new AdminUser($input->getArgument('username'));
@@ -73,18 +71,16 @@ class CreateAdminCommand extends ContainerAwareCommand
                 $output->writeln('-------------------------');
                 $output->writeln('<error>Error write record!</error>');
             }
-
         }
-
     }
 
     /**
      * @param $length
      * @return bool|string
      */
-    protected function randString($length) {
+    protected function randString($length)
+    {
         $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        return substr(str_shuffle($chars),0,$length);
+        return substr(str_shuffle($chars), 0, $length);
     }
-
 }

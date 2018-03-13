@@ -2,7 +2,6 @@
 
 namespace ADW\UserBundle\Repository;
 
-
 use Doctrine\ORM\EntityRepository;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
@@ -20,7 +19,7 @@ class AdminUserRepository extends EntityRepository implements UserProviderInterf
     /**
      * @var LoggerInterface
      */
-    protected  $logger;
+    protected $logger;
 
 
     /**

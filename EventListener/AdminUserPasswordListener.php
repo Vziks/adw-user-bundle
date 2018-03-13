@@ -7,7 +7,6 @@ use ADW\UserBundle\Entity\AdminUser;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 
-
 /**
  * Class AdminUserPasswordListener.
  * @author Anton Prokhorov
@@ -53,5 +52,4 @@ class AdminUserPasswordListener
         }
         $user->setPassword($this->passwordEncoder->encodePassword($user, $user->getPlainPassword()));
     }
-
 }

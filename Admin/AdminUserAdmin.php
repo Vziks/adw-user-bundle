@@ -52,7 +52,6 @@ class AdminUserAdmin extends AbstractAdmin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-
         $roles = $this->container->getParameter('security.role_hierarchy.roles');
 
         $rolesChoices = self::refactorRoles($roles);
@@ -89,7 +88,8 @@ class AdminUserAdmin extends AbstractAdmin
         ;
     }
 
-    public function setContainer (\Symfony\Component\DependencyInjection\ContainerInterface $container) {
+    public function setContainer(\Symfony\Component\DependencyInjection\ContainerInterface $container)
+    {
         $this->container = $container;
     }
 
@@ -114,5 +114,4 @@ class AdminUserAdmin extends AbstractAdmin
 
         return $roles;
     }
-
 }

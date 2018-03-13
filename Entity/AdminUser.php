@@ -19,7 +19,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class AdminUser implements UserInterface
 {
-
     const ROLE_USER_SUPER_ADMIN = 'ROLE_ADMIN';
     const ROLE_USER = 'ROLE_USER';
     const ROLE_USER_GOD_ADMIN = 'ROLE_SUPER_ADMIN';
@@ -216,6 +215,4 @@ class AdminUser implements UserInterface
     {
         return (string)$this->getUsername();
     }
-
-
 }

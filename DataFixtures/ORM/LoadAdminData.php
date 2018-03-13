@@ -40,7 +40,7 @@ class LoadAdminData extends AbstractFixture implements FixtureInterface, Contain
         $manager->flush();
     }
 
-    static public function getFakeAdmin()
+    public static function getFakeAdmin()
     {
         $admin = new AdminUser();
         $admin->setEmail("admin@gmail.com");
@@ -49,6 +49,4 @@ class LoadAdminData extends AbstractFixture implements FixtureInterface, Contain
 
         return $admin;
     }
-
-
 }

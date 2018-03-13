@@ -1,5 +1,5 @@
 services:
-    adw.user.admin.adminuser:
+    adw.admin.admin_user_admin:
         class: ADW\UserBundle\Admin\AdminUserAdmin
         arguments: [~, ADW\UserBundle\Entity\AdminUser, SonataAdminBundle:CRUD]
         tags:
@@ -7,7 +7,7 @@ services:
         calls:
             - [ setContainer, [ "@service_container" ] ]
 
-    adw.user.admin.password.listener:
+    adw.event_listener.admin_user_password_listener:
         class: ADW\UserBundle\EventListener\AdminUserPasswordListener
         arguments:
             - "@security.password_encoder"
@@ -15,12 +15,12 @@ services:
             - { name: doctrine.event_listener, event: prePersist, method: prePersist }
             - { name: doctrine.event_listener, event: preUpdate, method: preUpdate }
 
-    adw.user.security.admin_authentication_handler:
+    adw.security.handler.admin_authentication_handler:
         class: ADW\UserBundle\Security\Handler\AdminAuthenticationHandler
         arguments:
             - "@router"
 
-    adw.user.admin_user_repository:
+    adw.entity.admin_user_repository:
         class: Doctrine\ORM\EntityRepository
         factory: ["@doctrine.orm.entity_manager", getRepository]
         arguments:

@@ -1,4 +1,4 @@
-# ADW Slider Bundle #
+# ADW User Bundle #
 
 
 
@@ -73,7 +73,7 @@ security:
         ADW\UserBundle\Entity\AdminUser: sha512
     providers:
         admin_user_provider:
-            id: adw.user.admin_user_repository
+            id: adw.entity.admin_user_repository
     firewalls:
         admin:
             provider: admin_user_provider
@@ -84,8 +84,8 @@ security:
                 username_parameter: _email
                 password_parameter: _password
                 default_target_path: /admin
-                success_handler: adw.user.security.admin_authentication_handler
-                failure_handler: adw.user.security.admin_authentication_handler
+                success_handler: "adw.security.handler.admin_authentication_handler"
+                failure_handler: "adw.security.handler.admin_authentication_handler"
                 require_previous_session: false
             logout:
                 path: /admin/logout

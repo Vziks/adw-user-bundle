@@ -23,7 +23,6 @@ use Symfony\Component\Security\Http\Authorization\AccessDeniedHandlerInterface;
  */
 class AdminAuthenticationHandler implements AuthenticationSuccessHandlerInterface, AccessDeniedHandlerInterface, AuthenticationFailureHandlerInterface
 {
-
     protected $router;
 
     /**
@@ -48,7 +47,6 @@ class AdminAuthenticationHandler implements AuthenticationSuccessHandlerInterfac
      */
     public function handle(Request $request, AccessDeniedException $accessDeniedException)
     {
-
     }
 
     /**
